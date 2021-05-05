@@ -1,0 +1,517 @@
+{
+	"info": {
+		"_postman_id": "73255d01-bf88-40cc-b43f-1f1477cb1349",
+		"name": "oce",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "documents/api",
+			"item": [
+				{
+					"name": "1.2",
+					"item": [
+						{
+							"name": "folders",
+							"item": [
+								{
+									"name": "{folder Id}",
+									"item": [
+										{
+											"name": "Get Folder - OSB",
+											"protocolProfileBehavior": {
+												"disabledSystemHeaders": {}
+											},
+											"request": {
+												"auth": {
+													"type": "noauth"
+												},
+												"method": "GET",
+												"header": [
+													{
+														"key": "linkID",
+														"value": "<string>",
+														"description": "<p>Public link ID of a public link authorizing the current user to access this folder. It can be used as linkID or LinkID.</p>",
+														"disabled": true
+													},
+													{
+														"key": "dAccessCode",
+														"value": "<string>",
+														"description": "<p>Access code needed to use protected public links. It needs to be sent as part of a Cookie header in the following format: <code>dAccessCode-&#60;linkID&#62;=&#60;passcodeValue&#62;</code></p>",
+														"disabled": true
+													},
+													{
+														"key": "appLinkID",
+														"value": "<string>",
+														"description": "<p>Applink ID authorizing the current user to access this folder. Any time the parameter <code>appLinkID</code> is used, a parameter <code>accessToken</code> must be provided as well. It can be used as appLinkID or AppLinkID.</p>",
+														"disabled": true
+													},
+													{
+														"key": "accessToken",
+														"value": "<string>",
+														"description": "<p>Applink access token authorizing the current user to access this folder. This parameter is mandatory if <code>appLinkID</code> is used. It can be used as accessToken or AccessToken.</p>",
+														"disabled": true
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "{{OSB_URL}}/oce/documents/folder/:folderid",
+													"host": [
+														"{{OSB_URL}}"
+													],
+													"path": [
+														"oce",
+														"documents",
+														"folder",
+														":folderid"
+													],
+													"variable": [
+														{
+															"key": "folderid",
+															"value": "self"
+														}
+													]
+												},
+												"description": "<p>Get folder information for the specified folder.</p>"
+											},
+											"response": []
+										},
+										{
+											"name": "Create Folder - OSB",
+											"protocolProfileBehavior": {
+												"disabledSystemHeaders": {
+													"content-type": true
+												}
+											},
+											"request": {
+												"auth": {
+													"type": "noauth"
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "linkID",
+														"value": "<string>",
+														"description": "<p>Public link ID of a public link authorizing the current user to access this folder. To work, this public link must have the contributor role granted. It can be used as linkID or LinkID.</p>",
+														"disabled": true
+													},
+													{
+														"key": "dAccessCode",
+														"value": "<string>",
+														"description": "<p>Access code needed to use protected public links. It needs to be sent as part of a Cookie header in the following format: <code>dAccessCode-&#60;linkID&#62;=&#60;passcodeValue&#62;</code></p>",
+														"disabled": true
+													},
+													{
+														"key": "appLinkID",
+														"value": "<string>",
+														"description": "<p>Applink ID authorizing the current user to access this folder. Any time the parameter <code>appLinkID</code> is used, a parameter <code>accessToken</code> must be provided as well. To work, this applink must have at least the contributor role granted. It can be used as appLinkID or AppLinkID.</p>",
+														"disabled": true
+													},
+													{
+														"key": "accessToken",
+														"value": "<string>",
+														"description": "<p>Applink access token authorizing the current user to access this folder. This parameter is mandatory if <code>appLinkID</code> is used. It can be used as accessToken or AccessToken.</p>",
+														"disabled": true
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "",
+														"value": "",
+														"type": "text",
+														"disabled": true
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"name\": \"testFolder1\",\n    \"description\": \"testFolder1\"\n}"
+												},
+												"url": {
+													"raw": "{{OSB_URL}}/oce/documents/folder/:folderid",
+													"host": [
+														"{{OSB_URL}}"
+													],
+													"path": [
+														"oce",
+														"documents",
+														"folder",
+														":folderid"
+													],
+													"variable": [
+														{
+															"key": "folderid",
+															"value": "self"
+														}
+													]
+												},
+												"description": "<p>Create a new subfolder in the specified destination folder.</p><p><b>Note:</b><p>Two folders cannot have the same name in a given folder. Folder names are not case-sensitive; that is, <code>Folder_Name</code> and <code>folder_name</code> are considered identical. If a folder with the same name exists in the target destination, the name of the new folder is given a numeric increment. For example, if the folder <code>my_folder</code> already exists, the new folder is named <code>my_folder(2)</code>.</p>"
+											},
+											"response": []
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "files",
+							"item": [
+								{
+									"name": "{file Id}",
+									"item": [
+										{
+											"name": "Get Information - OSB",
+											"request": {
+												"auth": {
+													"type": "noauth"
+												},
+												"method": "GET",
+												"header": [
+													{
+														"key": "linkID",
+														"value": "<string>",
+														"description": "<p>Public link ID of a public link authorizing the current user to access this file. It can be used as linkID or LinkID.</p>",
+														"disabled": true
+													},
+													{
+														"key": "dAccessCode",
+														"value": "<string>",
+														"description": "<p>Access code needed to use protected public links. It needs to be sent as part of a Cookie header in the following format: <code>dAccessCode-&#60;linkID&#62;=&#60;passcodeValue&#62;</code></p>",
+														"disabled": true
+													},
+													{
+														"key": "appLinkID",
+														"value": "<string>",
+														"description": "<p>Applink ID authorizing the current user to access the parent folder or this file. Any time the parameter <code>appLinkID</code> is used, a parameter <code>accessToken</code> must be provided as well. It can be used as appLinkID or AppLinkID.</p>",
+														"disabled": true
+													},
+													{
+														"key": "accessToken",
+														"value": "<string>",
+														"description": "<p>Applink access token authorizing the current user to access the parent folder or this file. This parameter is mandatory if <code>appLinkID</code> is used. It can be used as accessToken or AccessToken.</p>",
+														"disabled": true
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "{{OSB_URL}}/oce/documents/files/:fileid",
+													"host": [
+														"{{OSB_URL}}"
+													],
+													"path": [
+														"oce",
+														"documents",
+														"files",
+														":fileid"
+													],
+													"variable": [
+														{
+															"key": "fileid",
+															"value": "D0DC8583C13C9A3E0109F48158BFB5115DB792857F1B"
+														}
+													]
+												},
+												"description": "<p>Get file information for the specified file.<p>"
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Upload File - OCE",
+									"request": {
+										"auth": {
+											"type": "basic",
+											"basic": [
+												{
+													"key": "password",
+													"value": "{{OCE_PASSWORD}}",
+													"type": "string"
+												},
+												{
+													"key": "username",
+													"value": "{{OCE_USER}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "linkID",
+												"value": "<string>",
+												"description": "<p>Public link ID of a public link authorizing the current user to access this file. To work, this public link must have the contributor role granted. It can be used as linkID or LinkID.</p>",
+												"disabled": true
+											},
+											{
+												"key": "dAccessCode",
+												"value": "<string>",
+												"description": "<p>Access code needed to use protected public links. It needs to be sent as part of a Cookie header in the following format: <code>dAccessCode-&#60;linkID&#62;=&#60;passcodeValue&#62;</code></p>",
+												"disabled": true
+											},
+											{
+												"key": "appLinkID",
+												"value": "<string>",
+												"description": "<p>Applink ID authorizing the current user to access the parent folder. Any time the parameter <code>appLinkID</code> is used, a parameter <code>accessToken</code> must be provided as well. To work, this applink must have at least the contributor role granted. It can be used as appLinkID or AppLinkID.</p>",
+												"disabled": true
+											},
+											{
+												"key": "accessToken",
+												"value": "<string>",
+												"description": "<p>Applink access token authorizing the current user to access the parent folder. This parameter is mandatory if <code>appLinkID</code> is used. It can be used as accessToken or AccessToken.</p>",
+												"disabled": true
+											},
+											{
+												"key": "Content-Type",
+												"value": "multipart/form-data"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "jsonInputParameters",
+													"value": "{\"parentID\" : \"self\"}",
+													"description": "<p>You can use this parameter to include the <code>parentID</code> parameter and the <code>duplicateResolution</code> parameter as a JSON payload with the request. <p>Set <code>parentID</code> to the globally unique identifier (GUID) of the folder to upload the file to. <b><p>The <code>parentID</code> parameter must be sent as a part of this JSON payload. This parameter is required.</p></b> For example: </p><code>&#123;<p> &#34;parentID &#34;:&#32;&#32;&#32;&#32;&#34;FB4CD874EF94CD2CC1B60B72T&#34;</p>&#125;</code></p><p>Also, to resolve any conflict with duplicate file names, you can set <code>duplicateResolution</code> to <code>TimeStampSuffix</code>. <p><b>The <code>duplicateResolution</code> parameter can be sent as a part of this JSON payload. This parameter is optional.</b></p> For example:</p> <code>&#123;<p> &#34;parentID &#34;:&#32;&#32;&#32;&#32;&#34;FB4CD874EF94CD2CC1B60B72T&#34;,</p><p> &#34;duplicateResolution  &#34;:&#32;&#32;&#32;&#32;&#34;TimeStampSuffix&#34;</p>&#125;</code></p>"
+												},
+												{
+													"key": "primaryFile",
+													"description": "File to upload.",
+													"type": "file",
+													"src": "/Users/carlgira/Desktop/captura_oce.png"
+												},
+												{
+													"key": "metadataValues",
+													"value": "<string>",
+													"description": "<p>You can use this parameter to set metadata values to a collection already assigned to any parent folder. The rules are the same as those applied to the set metadata values REST API. Use <code>Content-Type: application/json</code> to describe this information as a JSON object.</p><p>For example:</p><code>&#123;<p> &#34;collection &#34;:&#32;&#32;&#32;&#32;&#34;CollectionA&#34;,</p><p> &#34;fieldA &#34;:&#32;&#32;&#32;&#32;&#34;valueA&#34;,</p><p> &#34;fieldB &#34;:&#32;&#32;&#32;&#32;&#34;valueB&#34;,</p><p> &#34;fieldC &#34;:&#32;&#32;&#32;&#32;&#34;valueC&#34;</p>&#125;</code>",
+													"disabled": true
+												}
+											]
+										},
+										"url": {
+											"raw": "{{OCE_URL}}/documents/api/1.2/files/data",
+											"host": [
+												"{{OCE_URL}}"
+											],
+											"path": [
+												"documents",
+												"api",
+												"1.2",
+												"files",
+												"data"
+											]
+										},
+										"description": "<p>Upload a new file using a multipart request to specify destination and file information.</p><p><b>Note:</p><p>File names are not case-sensitive; that is, <code>File_Name</code> and <code>file_name</code> are considered identical. Two files cannot have the same name in a given folder. </p><p>By default, if a file with the same name exists in the target destination, the uploaded file replaces the existing file as a new revision.</b></p><p>The request is a multipart HTTP request where one part is a JSON object (<code>jsonInputParameters</code>) with the <code>parentID</code> and the other part is the content of the file itself (<code>primaryFile</code>). It is also possible to set metadata values using another JSON object (<code>metadataValues</code>).</p>"
+									},
+									"response": []
+								},
+								{
+									"name": "Upload File - OSB",
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "linkID",
+												"value": "<string>",
+												"description": "<p>Public link ID of a public link authorizing the current user to access this file. To work, this public link must have the contributor role granted. It can be used as linkID or LinkID.</p>",
+												"disabled": true
+											},
+											{
+												"key": "dAccessCode",
+												"value": "<string>",
+												"description": "<p>Access code needed to use protected public links. It needs to be sent as part of a Cookie header in the following format: <code>dAccessCode-&#60;linkID&#62;=&#60;passcodeValue&#62;</code></p>",
+												"disabled": true
+											},
+											{
+												"key": "appLinkID",
+												"value": "<string>",
+												"description": "<p>Applink ID authorizing the current user to access the parent folder. Any time the parameter <code>appLinkID</code> is used, a parameter <code>accessToken</code> must be provided as well. To work, this applink must have at least the contributor role granted. It can be used as appLinkID or AppLinkID.</p>",
+												"disabled": true
+											},
+											{
+												"key": "accessToken",
+												"value": "<string>",
+												"description": "<p>Applink access token authorizing the current user to access the parent folder. This parameter is mandatory if <code>appLinkID</code> is used. It can be used as accessToken or AccessToken.</p>",
+												"disabled": true
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"parentId\": \"self\",\n    \"fileName\": \"testFile2.txt\",\n    \"contentType\": \"text/plain\",\n    \"data\": \"dGVzdEZpbGU=\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{OSB_URL}}/oce/documents/files/upload/javacallout",
+											"host": [
+												"{{OSB_URL}}"
+											],
+											"path": [
+												"oce",
+												"documents",
+												"files",
+												"upload",
+												"javacallout"
+											]
+										},
+										"description": "<p>Upload a new file using a multipart request to specify destination and file information.</p><p><b>Note:</p><p>File names are not case-sensitive; that is, <code>File_Name</code> and <code>file_name</code> are considered identical. Two files cannot have the same name in a given folder. </p><p>By default, if a file with the same name exists in the target destination, the uploaded file replaces the existing file as a new revision.</b></p><p>The request is a multipart HTTP request where one part is a JSON object (<code>jsonInputParameters</code>) with the <code>parentID</code> and the other part is the content of the file itself (<code>primaryFile</code>). It is also possible to set metadata values using another JSON object (<code>metadataValues</code>).</p>"
+									},
+									"response": []
+								},
+								{
+									"name": "Upload File - OIC",
+									"request": {
+										"auth": {
+											"type": "basic",
+											"basic": [
+												{
+													"key": "password",
+													"value": "{{OIC_PASSWORD}}",
+													"type": "string"
+												},
+												{
+													"key": "username",
+													"value": "{{OIC_USER}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "linkID",
+												"value": "<string>",
+												"description": "<p>Public link ID of a public link authorizing the current user to access this file. To work, this public link must have the contributor role granted. It can be used as linkID or LinkID.</p>",
+												"disabled": true
+											},
+											{
+												"key": "dAccessCode",
+												"value": "<string>",
+												"description": "<p>Access code needed to use protected public links. It needs to be sent as part of a Cookie header in the following format: <code>dAccessCode-&#60;linkID&#62;=&#60;passcodeValue&#62;</code></p>",
+												"disabled": true
+											},
+											{
+												"key": "appLinkID",
+												"value": "<string>",
+												"description": "<p>Applink ID authorizing the current user to access the parent folder. Any time the parameter <code>appLinkID</code> is used, a parameter <code>accessToken</code> must be provided as well. To work, this applink must have at least the contributor role granted. It can be used as appLinkID or AppLinkID.</p>",
+												"disabled": true
+											},
+											{
+												"key": "accessToken",
+												"value": "<string>",
+												"description": "<p>Applink access token authorizing the current user to access the parent folder. This parameter is mandatory if <code>appLinkID</code> is used. It can be used as accessToken or AccessToken.</p>",
+												"disabled": true
+											},
+											{
+												"key": "Content-Type",
+												"value": "multipart/form-data"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "jsonInputParameters",
+													"value": "{\"parentID\" : \"self\"}",
+													"description": "<p>You can use this parameter to include the <code>parentID</code> parameter and the <code>duplicateResolution</code> parameter as a JSON payload with the request. <p>Set <code>parentID</code> to the globally unique identifier (GUID) of the folder to upload the file to. <b><p>The <code>parentID</code> parameter must be sent as a part of this JSON payload. This parameter is required.</p></b> For example: </p><code>&#123;<p> &#34;parentID &#34;:&#32;&#32;&#32;&#32;&#34;FB4CD874EF94CD2CC1B60B72T&#34;</p>&#125;</code></p><p>Also, to resolve any conflict with duplicate file names, you can set <code>duplicateResolution</code> to <code>TimeStampSuffix</code>. <p><b>The <code>duplicateResolution</code> parameter can be sent as a part of this JSON payload. This parameter is optional.</b></p> For example:</p> <code>&#123;<p> &#34;parentID &#34;:&#32;&#32;&#32;&#32;&#34;FB4CD874EF94CD2CC1B60B72T&#34;,</p><p> &#34;duplicateResolution  &#34;:&#32;&#32;&#32;&#32;&#34;TimeStampSuffix&#34;</p>&#125;</code></p>"
+												},
+												{
+													"key": "primaryFile",
+													"description": "File to upload.",
+													"type": "file",
+													"src": "/Users/carlgira/Desktop/captura_oic.png"
+												},
+												{
+													"key": "metadataValues",
+													"value": "<string>",
+													"description": "<p>You can use this parameter to set metadata values to a collection already assigned to any parent folder. The rules are the same as those applied to the set metadata values REST API. Use <code>Content-Type: application/json</code> to describe this information as a JSON object.</p><p>For example:</p><code>&#123;<p> &#34;collection &#34;:&#32;&#32;&#32;&#32;&#34;CollectionA&#34;,</p><p> &#34;fieldA &#34;:&#32;&#32;&#32;&#32;&#34;valueA&#34;,</p><p> &#34;fieldB &#34;:&#32;&#32;&#32;&#32;&#34;valueB&#34;,</p><p> &#34;fieldC &#34;:&#32;&#32;&#32;&#32;&#34;valueC&#34;</p>&#125;</code>",
+													"disabled": true
+												}
+											]
+										},
+										"url": {
+											"raw": "{{OIC_URL}}/ic/api/integration/v1/flows/rest/OCE_INTEGRATION/1.0/upload",
+											"host": [
+												"{{OIC_URL}}"
+											],
+											"path": [
+												"ic",
+												"api",
+												"integration",
+												"v1",
+												"flows",
+												"rest",
+												"OCE_INTEGRATION",
+												"1.0",
+												"upload"
+											]
+										},
+										"description": "<p>Upload a new file using a multipart request to specify destination and file information.</p><p><b>Note:</p><p>File names are not case-sensitive; that is, <code>File_Name</code> and <code>file_name</code> are considered identical. Two files cannot have the same name in a given folder. </p><p>By default, if a file with the same name exists in the target destination, the uploaded file replaces the existing file as a new revision.</b></p><p>The request is a multipart HTTP request where one part is a JSON object (<code>jsonInputParameters</code>) with the <code>parentID</code> and the other part is the content of the file itself (<code>primaryFile</code>). It is also possible to set metadata values using another JSON object (<code>metadataValues</code>).</p>"
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "OCE_URL",
+			"value": "https://oce.cec.ocp.oraclecloud.com"
+		},
+		{
+			"key": "OIC_URL",
+			"value": "https://oic.oraclecloud.com"
+		},
+		{
+			"key": "OCE_USER",
+			"value": "oce.user@oracle.com"
+		},
+		{
+			"key": "OCE_PASSWORD",
+			"value": "Oce.password12#"
+		},
+		{
+			"key": "OIC_USER",
+			"value": "oce.user@oracle.com"
+		},
+		{
+			"key": "OIC_PASSWORD",
+			"value": "Oic.password12#"
+		},
+		{
+			"key": "OSB_USER",
+			"value": "weblogic"
+		},
+		{
+			"key": "OSB_PASSWORD",
+			"value": "Osb.password12#"
+		},
+		{
+			"key": "OSB_URL",
+			"value": "https://osb.oraclecloud.com"
+		}
+	]
+}

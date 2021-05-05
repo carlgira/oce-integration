@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config">
+    <con:coreEntry>
+        <con:binding type="Native REST" xsi:type="con:NativeRestBindingType" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+        <con:xqConfiguration>
+            <con:snippetVersion>1.0</con:snippetVersion>
+        </con:xqConfiguration>
+    </con:coreEntry>
+    <con:router>
+        <con:flow>
+            <con:branch-node type="rest" name="BranchNode1">
+                <con:branch-table>
+                    <con:branch name="Get Information">
+                        <con:operator>equals</con:operator>
+                        <con:rest-values>
+                            <con:mediaType>application/json</con:mediaType>
+                            <con:path>/{folderid}</con:path>
+                            <con:verb>GET</con:verb>
+                        </con:rest-values>
+                        <con:flow>
+                            <con:route-node name="RouteNode1">
+                                <con:context/>
+                                <con:actions>
+                                    <con1:route xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config">
+                                        <con2:id xmlns:con2="http://www.bea.com/wli/sb/stages/config">_ActionId-a010305.2b2d9dc5.0.17922b36e55.N7ffa</con2:id>
+                                        <con1:service ref="oce-documents-api/business/ref-oce-documents" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+                                        <con1:outboundTransform>
+                                            <con2:transport-headers copy-all="false" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
+                                                <con3:id xmlns:con3="http://www.bea.com/wli/sb/stages/config">_ActionId-a010305.2b2d9dc5.2.17922b65544.N7ffb</con3:id>
+                                                <con2:header-set>outbound-request</con2:header-set>
+                                                <con2:header name="Content-Type" value="expression">
+                                                    <con3:xqueryText xmlns:con3="http://www.bea.com/wli/sb/stages/config">'application/json'</con3:xqueryText>
+                                                </con2:header>
+                                            </con2:transport-headers>
+                                            <con2:routing-options xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
+                                                <con3:id xmlns:con3="http://www.bea.com/wli/sb/stages/config">_ActionId-a010305.2b2d9dc5.0.17922b36e55.N7ff9</con3:id>
+                                                <con2:restOptions>
+                                                    <con2:verb>GET</con2:verb>
+                                                    <con2:relPath>
+                                                        <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">concat('/files/', $folderid)</con:xqueryText>
+                                                    </con2:relPath>
+                                                </con2:restOptions>
+                                            </con2:routing-options>
+                                        </con1:outboundTransform>
+                                        <con1:responseTransform/>
+                                    </con1:route>
+                                </con:actions>
+                            </con:route-node>
+                        </con:flow>
+                    </con:branch>
+                    <con:default-branch/>
+                </con:branch-table>
+            </con:branch-node>
+        </con:flow>
+    </con:router>
+    <aler:alertRules xsi:nil="true" xmlns:aler="http://xmlns.oracle.com/servicebus/monitoring/alert" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+</con:pipelineEntry>

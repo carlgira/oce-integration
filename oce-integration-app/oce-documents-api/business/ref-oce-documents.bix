@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:businessServiceEntry xmlns:con="http://xmlns.oracle.com/servicebus/business/config">
+    <con:coreEntry>
+        <con1:binding type="native REST" xsi:type="con:NativeRestBindingType" xmlns:con="http://www.bea.com/wli/sb/services/bindings/config" xmlns:con1="http://xmlns.oracle.com/servicebus/business/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+        <oper:operations enabled="true" xmlns:oper="http://xmlns.oracle.com/servicebus/business/operations">
+            <oper:throttling/>
+            <oper:resultCachingEnabled>true</oper:resultCachingEnabled>
+        </oper:operations>
+        <con:ws-policy>
+            <ser:binding-mode xmlns:ser="http://www.bea.com/wli/sb/services">no-policies</ser:binding-mode>
+        </con:ws-policy>
+        <con:xqConfiguration>
+            <ser:snippetVersion xmlns:ser="http://www.bea.com/wli/sb/services">1.0</ser:snippetVersion>
+        </con:xqConfiguration>
+    </con:coreEntry>
+    <con:endpointConfig>
+        <tran:provider-id xmlns:tran="http://www.bea.com/wli/sb/transports">http</tran:provider-id>
+        <tran:inbound xmlns:tran="http://www.bea.com/wli/sb/transports">false</tran:inbound>
+        <tran:URI xmlns:tran="http://www.bea.com/wli/sb/transports">
+            <env:value xmlns:env="http://www.bea.com/wli/config/env">https://nubecgpj-cloudcgpj.cec.ocp.oraclecloud.com/documents/api/1.2</env:value>
+        </tran:URI>
+        <tran:outbound-properties xmlns:tran="http://www.bea.com/wli/sb/transports">
+            <tran:load-balancing-algorithm>round-robin</tran:load-balancing-algorithm>
+            <tran:retry-count>1</tran:retry-count>
+            <tran:retry-interval>15</tran:retry-interval>
+            <tran:retry-application-errors>false</tran:retry-application-errors>
+            <tran:delay-interval-configuration isEnabled="true">
+                <tran:delay-interval>120</tran:delay-interval>
+            </tran:delay-interval-configuration>
+        </tran:outbound-properties>
+        <tran:provider-specific xsi:type="http:HttpEndPointConfiguration" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <http:outbound-properties>
+                <http:timeout>30</http:timeout>
+                <http:connection-timeout>5</http:connection-timeout>
+                <http:outbound-authentication xsi:type="http:HttpBasicAuthenticationType"/>
+                <http:service-account ref="oce-documents-api/resources/sa-oce-documents"/>
+                <http:follow-redirects>false</http:follow-redirects>
+                <http:chunked-streaming-mode>false</http:chunked-streaming-mode>
+                <http:session-sctikiness enabled="false" session-id-name="JSESSIONID"/>
+            </http:outbound-properties>
+            <http:dispatch-policy>SBDefaultResponseWorkManager</http:dispatch-policy>
+            <http:compression>
+                <http:compression-support>false</http:compression-support>
+            </http:compression>
+        </tran:provider-specific>
+    </con:endpointConfig>
+</con:businessServiceEntry>

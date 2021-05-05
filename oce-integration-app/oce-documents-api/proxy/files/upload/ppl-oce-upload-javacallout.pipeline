@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config">
+    <con:coreEntry>
+        <con:binding type="Native REST" xsi:type="con:NativeRestBindingType" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+        <con:xqConfiguration>
+            <con:snippetVersion>1.0</con:snippetVersion>
+        </con:xqConfiguration>
+    </con:coreEntry>
+    <con:router>
+        <con:pipeline name="PipelinePairNode1_request" type="request">
+            <con:stage name="stage1">
+                <con:context/>
+                <con:actions>
+                    <con1:javaScript xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con2:id xmlns:con2="http://www.bea.com/wli/sb/stages/config">_ActionId-a010305.2b2d9dc5.2.17922b65544.N7ff6</con2:id>
+                        <con1:script>process.parentId = process.body.parentId;
+process.fileName = process.body.fileName;
+process.contentType = process.body.contentType;
+process.data = process.body.data;</con1:script>
+                    </con1:javaScript>
+                    <con1:assign varName="oce_sa" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con2:id xmlns:con2="http://www.bea.com/wli/sb/stages/config">_ActionId-a010305.2b2d9dc5.1.17922b4b85d.N7ff2</con2:id>
+                        <con1:expr>
+                            <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">fn-bea:lookupBasicCredentials('oce-documents-api/resources/sa-oce-documents')</con:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con1:javaCallout varName="" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con2:id xmlns:con2="http://www.bea.com/wli/sb/stages/config">_ActionId-a010305.2b2d9dc5.2.17922b65544.N7ff5</con2:id>
+                        <con1:archive ref="oce-documents-api/resources/oce-file-manager-1.0.0"/>
+                        <con1:className>com.oce.files.FileManager</con1:className>
+                        <con1:method>public static void uploadFile(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)</con1:method>
+                        <con1:expr>
+                            <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">'https://nubecgpj-cloudcgpj.cec.ocp.oraclecloud.com/documents'</con:xqueryText>
+                        </con1:expr>
+                        <con1:expr>
+                            <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">$oce_sa/*:username/text()</con:xqueryText>
+                        </con1:expr>
+                        <con1:expr>
+                            <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">$oce_sa/*:password/text()</con:xqueryText>
+                        </con1:expr>
+                        <con1:expr>
+                            <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">$parentId</con:xqueryText>
+                        </con1:expr>
+                        <con1:expr>
+                            <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">$fileName</con:xqueryText>
+                        </con1:expr>
+                        <con1:expr>
+                            <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">$contentType</con:xqueryText>
+                        </con1:expr>
+                        <con1:expr>
+                            <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">$data</con:xqueryText>
+                        </con1:expr>
+                        <con1:return-param-as-ref>false</con1:return-param-as-ref>
+                    </con1:javaCallout>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline name="PipelinePairNode1_response" type="response">
+            <con:stage name="stage1">
+                <con:context/>
+                <con:actions>
+                    <con1:javaScript xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con2:id xmlns:con2="http://www.bea.com/wli/sb/stages/config">_ActionId-a010305.2b2d9dc5.0.17922b36e55.N7ff3</con2:id>
+                        <con1:script>process.body = {"status" : process.fileName + " uploaded"};</con1:script>
+                    </con1:javaScript>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:flow>
+            <con:pipeline-node name="PipelinePairNode1">
+                <con:request>PipelinePairNode1_request</con:request>
+                <con:response>PipelinePairNode1_response</con:response>
+            </con:pipeline-node>
+        </con:flow>
+    </con:router>
+</con:pipelineEntry>
