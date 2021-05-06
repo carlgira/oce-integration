@@ -44,3 +44,5 @@ Open postman and import the file oce.postman_collection.json. Configure all the 
 * OCE_USER, OIC_USER, OSB_USER
 * OCE_PASSWORD, OIC_PASSWORD, OSB_PASSWORD
 
+There are different tests to call the OSB services, the OIC upload integration or the OCE API.
+
