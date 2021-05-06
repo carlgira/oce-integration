@@ -287,7 +287,7 @@
 													"key": "primaryFile",
 													"description": "File to upload.",
 													"type": "file",
-													"src": "/Users/carlgira/Desktop/captura_oce.png"
+													"src": "/Users/carlgira/Desktop/fichero_oce.png"
 												},
 												{
 													"key": "metadataValues",
@@ -308,6 +308,82 @@
 												"1.2",
 												"files",
 												"data"
+											]
+										},
+										"description": "<p>Upload a new file using a multipart request to specify destination and file information.</p><p><b>Note:</p><p>File names are not case-sensitive; that is, <code>File_Name</code> and <code>file_name</code> are considered identical. Two files cannot have the same name in a given folder. </p><p>By default, if a file with the same name exists in the target destination, the uploaded file replaces the existing file as a new revision.</b></p><p>The request is a multipart HTTP request where one part is a JSON object (<code>jsonInputParameters</code>) with the <code>parentID</code> and the other part is the content of the file itself (<code>primaryFile</code>). It is also possible to set metadata values using another JSON object (<code>metadataValues</code>).</p>"
+									},
+									"response": []
+								},
+								{
+									"name": "Upload File - OSB http",
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "linkID",
+												"value": "<string>",
+												"description": "<p>Public link ID of a public link authorizing the current user to access this file. To work, this public link must have the contributor role granted. It can be used as linkID or LinkID.</p>",
+												"disabled": true
+											},
+											{
+												"key": "dAccessCode",
+												"value": "<string>",
+												"description": "<p>Access code needed to use protected public links. It needs to be sent as part of a Cookie header in the following format: <code>dAccessCode-&#60;linkID&#62;=&#60;passcodeValue&#62;</code></p>",
+												"disabled": true
+											},
+											{
+												"key": "appLinkID",
+												"value": "<string>",
+												"description": "<p>Applink ID authorizing the current user to access the parent folder. Any time the parameter <code>appLinkID</code> is used, a parameter <code>accessToken</code> must be provided as well. To work, this applink must have at least the contributor role granted. It can be used as appLinkID or AppLinkID.</p>",
+												"disabled": true
+											},
+											{
+												"key": "accessToken",
+												"value": "<string>",
+												"description": "<p>Applink access token authorizing the current user to access the parent folder. This parameter is mandatory if <code>appLinkID</code> is used. It can be used as accessToken or AccessToken.</p>",
+												"disabled": true
+											},
+											{
+												"key": "Content-Type",
+												"value": "multipart/form-data"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "jsonInputParameters",
+													"value": "{\"parentID\" : \"self\"}",
+													"description": "<p>You can use this parameter to include the <code>parentID</code> parameter and the <code>duplicateResolution</code> parameter as a JSON payload with the request. <p>Set <code>parentID</code> to the globally unique identifier (GUID) of the folder to upload the file to. <b><p>The <code>parentID</code> parameter must be sent as a part of this JSON payload. This parameter is required.</p></b> For example: </p><code>&#123;<p> &#34;parentID &#34;:&#32;&#32;&#32;&#32;&#34;FB4CD874EF94CD2CC1B60B72T&#34;</p>&#125;</code></p><p>Also, to resolve any conflict with duplicate file names, you can set <code>duplicateResolution</code> to <code>TimeStampSuffix</code>. <p><b>The <code>duplicateResolution</code> parameter can be sent as a part of this JSON payload. This parameter is optional.</b></p> For example:</p> <code>&#123;<p> &#34;parentID &#34;:&#32;&#32;&#32;&#32;&#34;FB4CD874EF94CD2CC1B60B72T&#34;,</p><p> &#34;duplicateResolution  &#34;:&#32;&#32;&#32;&#32;&#34;TimeStampSuffix&#34;</p>&#125;</code></p>"
+												},
+												{
+													"key": "primaryFile",
+													"description": "File to upload.",
+													"type": "file",
+													"src": "/Users/carlgira/Desktop/fichero_osb.png"
+												},
+												{
+													"key": "metadataValues",
+													"value": "<string>",
+													"description": "<p>You can use this parameter to set metadata values to a collection already assigned to any parent folder. The rules are the same as those applied to the set metadata values REST API. Use <code>Content-Type: application/json</code> to describe this information as a JSON object.</p><p>For example:</p><code>&#123;<p> &#34;collection &#34;:&#32;&#32;&#32;&#32;&#34;CollectionA&#34;,</p><p> &#34;fieldA &#34;:&#32;&#32;&#32;&#32;&#34;valueA&#34;,</p><p> &#34;fieldB &#34;:&#32;&#32;&#32;&#32;&#34;valueB&#34;,</p><p> &#34;fieldC &#34;:&#32;&#32;&#32;&#32;&#34;valueC&#34;</p>&#125;</code>",
+													"disabled": true
+												}
+											]
+										},
+										"url": {
+											"raw": "{{OSB_URL}}/oce/documents/files/upload/http",
+											"host": [
+												"{{OSB_URL}}"
+											],
+											"path": [
+												"oce",
+												"documents",
+												"files",
+												"upload",
+												"http"
 											]
 										},
 										"description": "<p>Upload a new file using a multipart request to specify destination and file information.</p><p><b>Note:</p><p>File names are not case-sensitive; that is, <code>File_Name</code> and <code>file_name</code> are considered identical. Two files cannot have the same name in a given folder. </p><p>By default, if a file with the same name exists in the target destination, the uploaded file replaces the existing file as a new revision.</b></p><p>The request is a multipart HTTP request where one part is a JSON object (<code>jsonInputParameters</code>) with the <code>parentID</code> and the other part is the content of the file itself (<code>primaryFile</code>). It is also possible to set metadata values using another JSON object (<code>metadataValues</code>).</p>"
@@ -353,7 +429,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"parentId\": \"self\",\n    \"fileName\": \"testFile2.txt\",\n    \"contentType\": \"text/plain\",\n    \"data\": \"dGVzdEZpbGU=\"\n}",
+											"raw": "{\n    \"parentId\": \"self\",\n    \"fileName\": \"fichero_osb.txt\",\n    \"contentType\": \"text/plain\",\n    \"data\": \"dGVzdEZpbGU=\"\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -438,7 +514,7 @@
 													"key": "primaryFile",
 													"description": "File to upload.",
 													"type": "file",
-													"src": "/Users/carlgira/Desktop/captura_oic.png"
+													"src": "/Users/carlgira/Desktop/fichero_oic.png"
 												},
 												{
 													"key": "metadataValues",
